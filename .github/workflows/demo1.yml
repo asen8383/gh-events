@@ -1,5 +1,8 @@
 name: Events Demo 1
-on: ...
+on:   # EVENTS below will trigger the workflow
+  pull_request:
+    types: [opened, edited]
+  workflow_dispatch:   # Manually
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -16,3 +19,22 @@ jobs:
         run: npm run build
       - name: Deploy project
         run: echo "Deploying..."
+
+
+
+# # On push and manually
+# name: Events Demo 1
+# on: [push, workflow_dispatch]
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+
+
+# # Second way to define a list
+# name: Events Demo 1
+# on:
+#   pull_request:
+#     types:
+#       - opened
+#       - edited
+# jobs:
