@@ -1,8 +1,23 @@
 name: Events Demo 1
 on:   # EVENTS below will trigger the workflow
-  pull_request:
+  pull_request: # Triggered by PR
     types: [opened, edited]
-  workflow_dispatch:   # Manually
+    # # You can also add the branches filter here, not only in the "push:"" event
+    # branches:
+    #   - main
+    #   - 'dev-*'
+    #   - 'feat/**' 
+    
+  workflow_dispatch:   # Triggered manually
+  push: # Triggered by a push
+    branches:
+      - main
+      - 'dev-*'
+      - 'feat/**' # All branches staring with "feat/", including additinal forward slashes after the first one.\
+
+      # path: # If file(s) is changed in a specific path/folder
+    paths-ignore: # If there is a change in file(s) exept a specific path/folder
+      - ".github/workflows/*"
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -19,7 +34,6 @@ jobs:
         run: npm run build
       - name: Deploy project
         run: echo "Deploying..."
-
 
 
 # # On push and manually
